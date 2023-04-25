@@ -1,0 +1,15 @@
+.top-bar h1 {
+font-size: 30px;
+font-weight: 600;
+}
+
+.mainHead h2 {
+    font-size: 70px;
+    text-align: center;
+}
+
+#searchBar, #searchBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-items: center;
+}
