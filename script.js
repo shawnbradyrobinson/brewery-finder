@@ -1,20 +1,7 @@
-var testURL = "https://api.openbrewerydb.org/v1/breweries";
-
-
+// === GOOGLE MAPS API STUFF === 
 //https://www.google.com/maps/embed/v1/directions?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&origin=START_ADDRESS&destination=END_ADDRESS
 
-fetch (testURL)
-.then(function (response){
-
-return response.json();
-
-})
-.then (function (data){
-
-console.log(data);
-
-})
-
+// === OPENBREWERYDB API STUFF === 
 //LIST OF "BOILERPLATE" API Calls from OpenBreweryDB 
 var breweryURL = "https://api.openbrewerydb.org/v1/breweries";
 var byCityURL = "https://api.openbrewerydb.org/v1/breweries?by_city=san_diego&per_page=10";
@@ -43,6 +30,20 @@ var byTypeURL = "https://api.openbrewerydb.org/v1/breweries?by_type=micro&per_pa
 // console.log(data[0].address_1);
 
 // })
+
+// === DOM OBJECTS === 
+var defaultSearch = document.querySelector("#default-search");
+var searchButton = document.querySelector("#search-button");
+
+searchButton.addEventListener("click", function (event){
+event.preventDefault();
+console.log("button works!");
+console.log("SEARCH VALUE: " +defaultSearch.value);
+searchByCity(defaultSearch.value);
+
+});
+
+
 
 
 function searchByCity(cityString){
@@ -90,5 +91,3 @@ function pullCoordinates(latitudeArray, longitudeArray){
     }
 
 }
-
-searchByCity("San Diego"); 
