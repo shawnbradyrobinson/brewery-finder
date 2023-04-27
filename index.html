@@ -25,20 +25,19 @@
 </head>
 <!-- Body ------------------------------------------------------- -->
 <body class="bg-gray-100">
-  <section>
+  
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
-      <div class=" flex flex-wrap items-center justify-between mx-auto p-4">
+      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" class="flex items-center">
           <img src="./images/BrewFinderLogo.svg" class="h-8 mr-3" alt="BrewFinder Logo" />
           <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">BrewFinder</span>
         </a>
         <button data-collapse-toggle="navbar-default" type="button"
           class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          aria-controls="navbar-default" aria-expanded="false">
+          aria-controls="navbar-default" aria-expanded="false" onclick="toggleMenu()">
           <span class="sr-only">Open main menu</span>
           <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
           </button>
-          <!-- -------------------------------------------------------- -->
           <div class="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul
               class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
@@ -70,7 +69,7 @@
           </div>
         </div>
     </nav>
-  </section>
+  
 
   <!-- HERO-------------------------------------------------------- -->
   <div
@@ -87,7 +86,7 @@
       >
         <div class="flex justify-center items-start h-full">
           <div class="text-center text-white px-6 md:px-12">
-            <h1 class="text-4xl md:text-6xl xl:text-7xl font-bold tracking-tight mt-20 mb-12">
+            <h1 class="text-4xl md:text-5xl xl:text-6xl font-bold tracking-tight mt-20 mb-12">
               Cheers to finding your new favorite brewery.
             </h1>
           </div>
@@ -95,15 +94,14 @@
       </div>
     </div>
 
-
-  <!-- Search Bar---------------------------------------------------------->
-  <div class="bg-gray-100 dark:bg-gray-800 py-20">
-    <h2 class="text-1xl md:text-3xl xl:text-4xl font-bold tracking-tight px-auto text-white text-center ">
+  <!-- Search Bar-------------------------------------------------------- -->
+  <div class="bg-gray-100 dark:bg-gray-800 py-16">
+    <h2 class="text-3xl md:text-3xl xl:text-4xl font-bold tracking-tight px-auto text-white text-center ">
       Find Local Brews
     </h2>
     <form class="bg-gray-100 dark:bg-gray-800" >
       <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-      <div class="relative mx-auto my-20 w-1/2">
+      <div class="relative mx-auto my-20 w-3/5">
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <svg
               aria-hidden="true"
@@ -120,13 +118,15 @@
         </div>
         <input type="search" id="default-search"
           class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Enter A City" required />
+          placeholder="Kansas City" required />
         <button type="submit" id="search-button"
           class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           Search
         </button>
       </div>
     </form>
+  </div>
+
   <!-- Map Input Placeholder------------------------------------------------------------------------------------ -->
   <div class="bg-gray-100 dark:bg-gray-800 py-10">
     <div class="container mx-auto px-4">
@@ -135,19 +135,105 @@
     </div>
   </div>
 
+  <!-- Brewery Location Card Trial -->
+<section class="flex justify-around my-2">
+  <div id="brewery-card-1" class="max-w-xs p-2 bg-white border text-center border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <a href="#">
+      <h5 id="brewery-name-1" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Allagash <br> Brewing Company</h5>
+      <img src="./images/BrewFinderLogo.svg" class="h-8 mr-3 m-2 inline-flex justify-center" alt="BrewFinder Logo" />
+    </a>
+    <br>
+    <span id="brewery-type-1" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Nano</span>
+    <p  id="brewery-location-info-1"class="my-3 font-normal text-gray-500 dark:text-gray-400">Address:<br>[BrewDB Address Data]<br>[BrewDB City/State Data]</p>
+    <a id="brewery-website-link-1" href="#" class="inline-flex items-center text-blue-600 hover:underline">
+        Checkout their website
+        <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path></svg>
+    </a>
+    <button id="brewery-directions-1" type="button" class="text-white m-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      Get Directions
+      <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+  </button>
+  </div>
+<!-- ------ -->
+  <div id="brewery-card-2" class="max-w-xs p-2 bg-white border text-center border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <a href="#">
+      <h5 id="brewery-name-2"class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Allagash <br> Brewing Company</h5>
+      <img src="./images/BrewFinderLogo.svg" class="h-8 mr-3 m-2 inline-flex justify-center" alt="BrewFinder Logo" />
+    </a>
+    <br>
+    <span id="brewery-type-2" class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Micro</span>
+    <p id="brewery-location-info-2"class="my-3 font-normal text-gray-500 dark:text-gray-400">Address:<br>[BrewDB Address Data]<br>[BrewDB City/State Data]</p>
+    <a id="brewery-website-link-2" href="#" class="inline-flex items-center text-blue-600 hover:underline">
+        Checkout their website
+        <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path></svg>
+    </a>
+    <button id="brewery-directions-2" type="button" class="text-white m-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      Get Directions
+      <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+  </button>
+  </div>
+<!-- -------- -->
+  <div id="brewery-card-3" class="max-w-xs p-2 bg-white border text-center border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <a href="#">
+      <h5 id="brewery-name-3" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Allagash <br> Brewing Company</h5>
+      <img src="./images/BrewFinderLogo.svg" class="h-8 mr-3 m-2 inline-flex justify-center" alt="BrewFinder Logo" />
+    </a>
+    <br>
+    <span id="brewery-type-3" class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">Regional</span>
+    <p id="brewery-location-info-3" class="my-3 font-normal text-gray-500 dark:text-gray-400">Address:<br>[BrewDB Address Data]<br>[BrewDB City/State Data]</p>
+    <a id="brewery-website-link-3" href="#" class="inline-flex items-center text-blue-600 hover:underline">
+        Checkout their website
+        <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path></svg>
+    </a>
+    <button id="brewery-directions-3" type="button" class="text-white m-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      Get Directions
+      <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+  </button>
+  </div>
+<!-- -------- -->
+  <div id="brewery-card-4" class="max-w-xs p-2 bg-white border text-center border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <a href="#">
+      <h5 id="brewery-name-4" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Allagash <br> Brewing Company</h5>
+      <img src="./images/BrewFinderLogo.svg" class="h-8 mr-3 m-2 inline-flex justify-center" alt="BrewFinder Logo" />
+    </a>
+    <br>
+    <span id="brewery-type-4" class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">Large</span>
+    <p id="brewery-location-info-4" class="my-3 font-normal text-gray-500 dark:text-gray-400">Address:<br>[BrewDB Address Data]<br>[BrewDB City/State Data]</p>
+    <a id="brewery-website-link-4" href="#" class="inline-flex items-center text-blue-600 hover:underline">
+        Checkout their website
+        <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path></svg>
+    </a>
+    <button id="brewery-directions-4" type="button" class="text-white m-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      Get Directions
+      <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+  </button>
+  </div>
+  <!-- -------- -->
+  <div id="brewery-card-5" class="max-w-xs p-2 bg-white border text-center border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <a href="#">
+      <h5 id="brewery-name-5" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Allagash <br> Brewing Company</h5>
+      <img src="./images/BrewFinderLogo.svg" class="h-8 mr-3 m-2 inline-flex justify-center" alt="BrewFinder Logo" />
+    </a>
+    <br>
+    <span id="brewery-type-5" class="bg-purple-100 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-purple-400 border border-purple-400">BrewPub</span>
+    <p id="brewery-location-info-5" class="my-3 font-normal text-gray-500 dark:text-gray-400">Address:<br>[BrewDB Address Data]<br>[BrewDB City/State Data]</p>
+    <a id="brewery-website-link-5" href="#" class="inline-flex items-center text-blue-600 hover:underline">
+        Checkout their website
+        <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path></svg>
+    </a>
+    <button id="brewery-directions-5" type="button" class="text-white m-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      Get Directions
+      <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+  </button>
+  </div>
+</section>
+
+
   <!-- About Us--------------------------------------------------------------------------------------------- -->
   <div class="bg-gray-100 dark:bg-gray-800 py-10">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-6">About Us</h2>
-      <p class="text-gray-700 dark:text-gray-400">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis,
-        voluptas totam deserunt ullam libero, rem quisquam error possimus, perspiciatis asperiores vero et aperiam? Ab
-        minus, natus itaque facilis vitae esse. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-        bibendum id libero id ullamcorper. Sed vitae dolor vel justo blandit ullamcorper. Nunc dignissim lectus id
-        facilisis dignissim. Fusce consectetur vestibulum justo in suscipit. Nullam sed feugiat dui, at bibendum dui.
-      </p>
-      <p class="text-gray-700 dark:text-gray-400 mt-4">Morbi pellentesque risus sit amet nibh consequat suscipit.
-        Praesent bibendum justo nec purus eleifend convallis. Fusce gravida nisl vitae rhoncus fringilla. Donec nec urna
-        justo. Praesent faucibus condimentum sem ac scelerisque. Aenean semper sollicitudin facilisis.</p>
+      <p class="text-gray-700 dark:text-gray-400 mt-4 mb-20 px-20 text-center">We're a group of beer enthusiasts who, after one too many failed attempts at finding good breweries in new cities, decided enough was enough.  We were tired of wandering aimlessly, searching for a cold beer oasis in a hot desert of mediocre bars. So we put our heads together, drank some more beer, and came up with the genius idea for BrewFinder. Now, we can help others avoid the same pitfalls we fell into and experience the joy of discovering great breweries wherever they go. Plus, we get to write off all our beer expenses as "research and development" now, so it's a win-win for everyone.</p>
     </div>
   </div>
 
