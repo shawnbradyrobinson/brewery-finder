@@ -35,13 +35,14 @@ var byTypeURL = "https://api.openbrewerydb.org/v1/breweries?by_type=micro&per_pa
 var defaultSearch = document.querySelector("#default-search");
 var searchButton = document.querySelector("#search-button");
 
-searchButton.addEventListener("click", function (event){
-event.preventDefault();
-console.log("button works!");
-console.log("SEARCH VALUE: " +defaultSearch.value);
-searchByCity(defaultSearch.value);
+// searchButton.addEventListener("click", function (event){
+// event.preventDefault();
+// console.log("button works!");
+// console.log("SEARCH VALUE: " +defaultSearch.value);
+// //searchByCity(defaultSearch.value);
+// searchByType(defaultSearch.value);
 
-});
+// });
 
 
 
@@ -67,7 +68,7 @@ function searchByCity(cityString){
         console.log("--------------");
         console.log("BREWERY NAME: " +data[i].name);
         console.log("ADDRESS: " +data[i].address_1); 
-        console.log("CITY: " +data[i].city);
+        console.log("CITY + STATE: " +data[i].city+ ", " +data[i].state);
         console.log("LATITUDE: " +data[i].latitude);
         latitudeArray.push(data[i].latitude);
         console.log("LONGITUDE: " +data[i].longitude);
@@ -91,3 +92,46 @@ function pullCoordinates(latitudeArray, longitudeArray){
     }
 
 }
+
+function searchByType(typeString){
+    console.log(typeString);
+    breweryTypes = ["micro", "nano", "regional", "brewpub", "large", "planning", "bar", "contract", "proprietor", "closed"];
+
+
+    if (typeString !== "micro" && typeString !== "nano" && typeString !== "regional" && typeString !== "brewpub" && typeString !== "large" && typeString !== "planning" && typeString !== "bar" && typeString !== "contract" && typeString !== "proprietor" && typeString !== "closed"){
+        console.log("That wasn't a type!");
+        return; 
+    }
+    
+    var byTypeURL = "https://api.openbrewerydb.org/v1/breweries?by_type=" +typeString+ "&per_page=10";
+
+
+    fetch (byTypeURL)
+    . then (function (response){
+       return response.json();
+    })
+    .then (function (data){
+        var latitudeArray = [];
+        var longitudeArray = [];
+        for (k=0; k < data.length; k++){
+            console.log(data);
+            console.log("=====================");
+            console.log("BREWERY NAME: " +data[k].name);
+            console.log("ADDRESS: " +data[k].address_1);
+            console.log("BREWERY TYPE: " +data[k].brewery_type);
+            console.log("CITY + STATE: " +data[k].city+ ", " +data[k].state);
+            console.log("LATITUDE: " +data[k].latitude);
+            latitudeArray.push(data[k].latitude);
+            console.log("LONGITUDE: " +data[k].longitude);
+            longitudeArray.push(data[k].longitude);
+            console.log("=====================");
+
+        }
+        pullCoordinates(latitudeArray, longitudeArray);
+    
+    })
+
+
+}
+
+searchByType("micro");
