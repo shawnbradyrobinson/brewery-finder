@@ -1,5 +1,5 @@
 // === GOOGLE MAPS API STUFF === 
-//https://www.google.com/maps/embed/v1/directions?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&origin=START_ADDRESS&destination=END_ADDRESS
+var mapsBaseURL = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&origin=START_ADDRESS&destination=END_ADDRESS";
 
 // === OPENBREWERYDB API STUFF === 
 //LIST OF "BOILERPLATE" API Calls from OpenBreweryDB 
@@ -7,33 +7,11 @@ var breweryURL = "https://api.openbrewerydb.org/v1/breweries";
 var byCityURL = "https://api.openbrewerydb.org/v1/breweries?by_city=san_diego&per_page=10";
 var byTypeURL = "https://api.openbrewerydb.org/v1/breweries?by_type=micro&per_page=10";
 
-// fetch (breweryURL)
-// .then(function (response){
-
-// return response.json();
-
-// })
-// .then (function (data){
-
-// console.log(data);
-
-// })
-
-// fetch (byTypeURL)
-// .then(function (response){
-
-// return response.json();
-
-// })
-// .then (function (data){
-// // vv this is the basic format to access data out vv 
-// console.log(data[0].address_1);
-
-// })
 
 // === DOM OBJECTS === 
 var defaultSearch = document.querySelector("#default-search");
 var searchButton = document.querySelector("#search-button");
+var mapView = document.querySelector("#map-view");
 
 // searchButton.addEventListener("click", function (event){
 // event.preventDefault();
@@ -134,4 +112,16 @@ function searchByType(typeString){
 
 }
 
-searchByType("micro");
+//function that creates an iframe dynamically and appends it to the correct region on screen 
+function makeGoogleMap(searchQuery){
+    var googleMap = document.createElement("iframe");
+    googleMap.setAttribute("width", "100%");
+    googleMap.setAttribute("height", "100%");
+    googleMap.setAttribute("frameborder", "0");
+    googleMap.setAttribute("style", "border:0");
+    googleMap.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+    googleMap.setAttribute("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&q=" +searchQuery);
+    mapView.append(googleMap);
+}
+
+makeGoogleMap("Boulevard Brewing");
