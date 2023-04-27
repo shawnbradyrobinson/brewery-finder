@@ -112,19 +112,87 @@ function searchByType(typeString){
 
 }
 
-//function that creates an iframe dynamically and appends it to the correct region on screen 
-function makeGoogleMap(searchQuery){
+//function to process the search query and channel it to the correct output...
+function processSearch(searchQuery){
+    // ==== PROCESSING BREW TYPE SEARCHES === 
+    //declares a variable that will hold the specific brew type, for searching purposes 
+    var brewType; 
+    //if the search was any of the following, then the user is doing a "type search"...so we'll run makeTypeGoogleMap()
+    if (searchQuery === "micro" || searchQuery === "nano" || searchQuery === "regional" || searchQuery === "brewpub" || searchQuery === "large" || searchQuery === "contract" || searchQuery === "proprietor"){
+        brewType = searchQuery;
+        console.log("We are inside the if statement and brewType equals " +brewType);
+        makeTypeGoogleMap(brewType);
+        return; 
+    }
+
+   
+    // === PROCESSING BREWERY NAME SEARCHES === 
+    // NOTE FOR TEAM: there has to be a more sophisticated answer to how to do this lol 
+    if (searchQuery.includes("brewery")){
+        makeNameGoogleMap(searchQuery);
+        return; 
+    }
+    
+   
+    // === PROCESSING CITY SEARCHES ===
+    makeCityGoogleMap(searchQuery);
+
+
+    // === PROCESSING BREWERY NAME SEARCHES === 
+    
+    
+
+
+    console.log("----------------");
+    console.log("Process Search() searchQuery= " +searchQuery);
+    console.log("----------------");
+    return searchQuery; 
+}
+/*NOTE FOR THURSDAY'S CLASS WITH THE TEAM...
+It seems like Google Maps API is doing a lot of the heavy lifting for us when it comes to the maps...really the only info we  *might* need from the OpenBreweryDB API are names/addresses of breweries, but even that it might just be easier to feed the search query "breweries in [insert city name]"
+
+OpenBreweryDB will still be helpful for outputting the cards, but I think we can drop the latitude and longitude stuff, honestly...unless there's a complication I"m overlooking. 
+
+
+*/ 
+//functions that creates an iframe dynamically and appends it to the correct region on screen 
+//how to create an embedded Google Map based on a brewery type search query 
+function makeTypeGoogleMap(brewType){
     var googleMap = document.createElement("iframe");
     googleMap.setAttribute("width", "100%");
     googleMap.setAttribute("height", "100%");
     googleMap.setAttribute("frameborder", "0");
     googleMap.setAttribute("style", "border:0");
     googleMap.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
-    googleMap.setAttribute("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&q=" +searchQuery);
+    googleMap.setAttribute("src", "https://www.google.com/maps/embed/v1/search?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&q=" +brewType+ "breweries in USA");
+    mapView.append(googleMap);
+}
+//how to create an embedded Google Map based on a city search query 
+function makeCityGoogleMap(searchQuery){
+    var googleMap = document.createElement("iframe");
+    googleMap.setAttribute("width", "100%");
+    googleMap.setAttribute("height", "100%");
+    googleMap.setAttribute("frameborder", "0");
+    googleMap.setAttribute("style", "border:0");
+    googleMap.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+    googleMap.setAttribute("src", "https://www.google.com/maps/embed/v1/search?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&q=breweries in" +searchQuery);
     mapView.append(googleMap);
 }
 
-makeGoogleMap("Boulevard Brewing");
+function makeNameGoogleMap(searchQuery){
+    var googleMap = document.createElement("iframe");
+    googleMap.setAttribute("width", "100%");
+    googleMap.setAttribute("height", "100%");
+    googleMap.setAttribute("frameborder", "0");
+    googleMap.setAttribute("style", "border:0");
+    googleMap.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+    googleMap.setAttribute("src", "https://www.google.com/maps/embed/v1/search?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&q=" +searchQuery+ "brewery");
+    mapView.append(googleMap);
+}
+
+
+
+processSearch("Kansas City");
 
 
 // Hamburger Menu Toggle
