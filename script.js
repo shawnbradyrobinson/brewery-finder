@@ -125,3 +125,14 @@ function makeGoogleMap(searchQuery){
 }
 
 makeGoogleMap("Boulevard Brewing");
+
+
+// Hamburger Menu Toggle
+function toggleMenu() {
+    var menu = document.getElementById('navbar-default');
+    if (menu.classList.contains('hidden')){
+        menu.classList.remove("hidden");
+    } else {
+        menu.classList.add('hidden');
+    }
+}
