@@ -1,6 +1,8 @@
 // === GOOGLE MAPS API STUFF === 
 var mapsBaseURL = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&origin=START_ADDRESS&destination=END_ADDRESS";
 
+// === YELP API KEY === 
+//https://api.yelp.com/v3//businesses/search/jxVJwFjiQiHX0VrDrtPP-KStC0OljNvuhH1e43RkAJZ0aZNeq6MzybosiCpMdQiP8GolAiFP2qLWhG6ed2fmTR24jaMST3xiVxgjhzUlREEEqjgfautl_I1KEQRLZHYx
 // === OPENBREWERYDB API STUFF === 
 //LIST OF "BOILERPLATE" API Calls from OpenBreweryDB 
 var breweryURL = "https://api.openbrewerydb.org/v1/breweries";
@@ -12,43 +14,10 @@ var byTypeURL = "https://api.openbrewerydb.org/v1/breweries?by_type=micro&per_pa
 var defaultSearch = document.querySelector("#default-search");
 var searchButton = document.querySelector("#search-button");
 var mapView = document.querySelector("#map-view");
+var cardContainer = document.querySelector("#card-container");
 
 // === TEMPORARY(?) DOM OBJECTS === 
-// --- CARD ONE --- 
-var breweryCard1 = document.querySelector("#brewery-card-1")
-var breweryName1 = document.querySelector("#brewery-name-1");
-var breweryType1 = document.querySelector("#brewery-type-1");
-var breweryLocationInfo1 = document.querySelector("#brewery-location-info-1");
-var breweryWebsiteLink1 = document.querySelector("#brewery-website-link-1");
-var breweryDirections1 = document.querySelector("#brewery-directions-1");
-// --- CARD TWO --- 
-var breweryCard2 = document.querySelector("#brewery-card-2")
-var breweryName2 = document.querySelector("#brewery-name-2");
-var breweryType2 = document.querySelector("#brewery-type-2");
-var breweryLocationInfo2 = document.querySelector("#brewery-location-info-2");
-var breweryWebsiteLink2 = document.querySelector("#brewery-website-link-2");
-var breweryDirections2 = document.querySelector("#brewery-directions-2");
-// --- CARD THREE --- 
-var breweryCard3 = document.querySelector("#brewery-card-3")
-var breweryName3 = document.querySelector("#brewery-name-3");
-var breweryType3 = document.querySelector("#brewery-type-3");
-var breweryLocationInfo3 = document.querySelector("#brewery-location-info-3");
-var breweryWebsiteLink3 = document.querySelector("#brewery-website-link-3");
-var breweryDirections3 = document.querySelector("#brewery-directions-3");
-// --- CARD FOUR --- 
-var breweryCard4 = document.querySelector("#brewery-card-4")
-var breweryName4 = document.querySelector("#brewery-name-4");
-var breweryType4 = document.querySelector("#brewery-type-4");
-var breweryLocationInfo4 = document.querySelector("#brewery-location-info-4");
-var breweryWebsiteLink4 = document.querySelector("#brewery-website-link-4");
-var breweryDirections4 = document.querySelector("#brewery-directions-4");
-// --- CARD FIVE --- 
-var breweryCard5 = document.querySelector("#brewery-card-5")
-var breweryName5 = document.querySelector("#brewery-name-5");
-var breweryType5 = document.querySelector("#brewery-type-5");
-var breweryLocationInfo5 = document.querySelector("#brewery-location-info-5");
-var breweryWebsiteLink5 = document.querySelector("#brewery-website-link-5");
-var breweryDirections5 = document.querySelector("#brewery-directions-5");
+
 
 searchButton.addEventListener("click", function (event){
 event.preventDefault();
@@ -91,9 +60,29 @@ function searchByCity(cityString){
         console.log("");
         console.log("----------------");
         pullCoordinates(latitudeArray, longitudeArray);
+
+        var brewBoxes = "";
+
+            brewBoxes += `<div id="brewery-card-1" class="max-w-xs p-2 bg-white border text-center border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <a href="#">
+            <h5 id="brewery-name-1" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">${data[i].name}</h5>
+            <img src="./images/BrewFinderLogo.svg" class="h-8 mr-3 m-2 inline-flex justify-center" alt="BrewFinder Logo" />
+            </a>
+            <br>
+            <span id="brewery-type-1" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">${data[i].brewery_type}</span>
+            <p  id="brewery-location-info-1"class="my-3 font-normal text-gray-500 dark:text-gray-400">Address: ${data[i].address_1}</p>
+            <a id="brewery-website-link-1" href="${data[i].website_url}" class="inline-flex items-center text-blue-600 hover:underline">
+                Checkout their website
+                <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path></svg>
+            </a>
+            <button id="brewery-directions-1" type="button" class="text-white m-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Get Directions
+            <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+        </div>`
     
     }
-    
+    cardContainer.innerHTML = brewBoxes;
     })
     
 }
@@ -141,8 +130,10 @@ function searchByType(typeString){
             longitudeArray.push(data[k].longitude);
             console.log("=====================");
 
-        }
-        pullCoordinates(latitudeArray, longitudeArray);
+            
+        
+
+        } 
     
     })
 
@@ -238,3 +229,21 @@ function toggleMenu() {
         menu.classList.add('hidden');
     }
 }
+
+//var forecastBoxes = "";
+// for (let i = 7; i <= 39; i += 8) {
+//     forecastBoxes += `<div class="forecast-box">
+//           <h5>${newDate}</h5>
+//           <img src="http://openweathermap.org/img/w/${
+//             response.list[i].weather[0].icon
+//           }.png"/>
+//           <p>Temp: ${Math.round(response.list[i].main.temp)}°F</p>
+//           <p>Wind: ${Math.round(response.list[i].wind.speed)} MPH</p>
+//           <p>Humidity: ${response.list[i].main.humidity}%</p>
+//         </div>`;
+//   }
+//   forecastBoxContainer.innerHTML = forecastBoxes;
+
+
+    
+searchByCity("Houston");
