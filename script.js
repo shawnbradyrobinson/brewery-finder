@@ -238,3 +238,46 @@ function toggleMenu() {
         menu.classList.add('hidden');
     }
 }
+
+
+// Hiding map-view container unless search parameters are filled
+var mapCont = document.querySelector(".map-cont");
+searchButton.onclick = ()=> {
+    mapCont.classList.add("activeMap");
+}
+
+/*var searchParameters = document.querySelector("#search-param");
+var map = new google.maps.Map(map-view, {
+
+});
+function newMap() {
+
+}
+searchParameters.addEventListener('change', newMap);
+
+google.maps.event.trigger(map, 'resize');
+
+$("#search-param").load()*/
+
+var map;
+var mapTypes = [makeTypeGoogleMap, makeCityGoogleMap, makeNameGoogleMap];
+var searchParameters = document.querySelector("#search-param");
+
+function combineTypes(functions) {
+    return function() {
+        for (var i = 0; i < functions.length; i++) {
+            functions[i]();
+        }
+    }
+}
+
+function reloadMapTypes() {
+    var combinedFunctions = combineTypes(mapTypes);
+    location.reload(combinedFunctions);
+}
+
+function newMap() {
+if (searchParameters.onfullscreenchange) {
+    location.reload(mapTypes); }
+}
+
