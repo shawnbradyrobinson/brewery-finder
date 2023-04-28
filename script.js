@@ -59,19 +59,18 @@ function searchByCity(cityString){
         longitudeArray.push(data[i].longitude);
         console.log("");
         console.log("----------------");
-        pullCoordinates(latitudeArray, longitudeArray);
-
+        var boxCount = 0; 
         var brewBoxes = "";
-
+        for (z=0; z < 5; z++){
             brewBoxes += `<div id="brewery-card-1" class="max-w-xs p-2 bg-white border text-center border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
-            <h5 id="brewery-name-1" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">${data[i].name}</h5>
+            <h5 id="brewery-name-1" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">${data[z].name}</h5>
             <img src="./images/BrewFinderLogo.svg" class="h-8 mr-3 m-2 inline-flex justify-center" alt="BrewFinder Logo" />
             </a>
             <br>
-            <span id="brewery-type-1" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">${data[i].brewery_type}</span>
-            <p  id="brewery-location-info-1"class="my-3 font-normal text-gray-500 dark:text-gray-400">Address: ${data[i].address_1}</p>
-            <a id="brewery-website-link-1" href="${data[i].website_url}" class="inline-flex items-center text-blue-600 hover:underline">
+            <span id="brewery-type-1" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">${data[z].brewery_type}</span>
+            <p  id="brewery-location-info-1"class="my-3 font-normal text-gray-500 dark:text-gray-400">Address: ${data[z].address_1}</p>
+            <a id="brewery-website-link-1" href="${data[z].website_url}" class="inline-flex items-center text-blue-600 hover:underline">
                 Checkout their website
                 <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path></svg>
             </a>
@@ -79,9 +78,9 @@ function searchByCity(cityString){
             Get Directions
             <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
-        </div>`
-    
-    }
+        </div>` 
+            }
+        }  
     cardContainer.innerHTML = brewBoxes;
     })
     
@@ -154,15 +153,16 @@ function processSearch(searchQuery){
     }
 
    
-    // === PROCESSING BREWERY NAME SEARCHES === 
-    // NOTE FOR TEAM: there has to be a more sophisticated answer to how to do this lol 
-    if (searchQuery.includes("brewery")){
-        makeNameGoogleMap(searchQuery);
-        return; 
-    }
+    // // === PROCESSING BREWERY NAME SEARCHES === 
+    // // NOTE FOR TEAM: there has to be a more sophisticated answer to how to do this lol 
+    // if (searchQuery.includes("brewery")){
+    //     makeNameGoogleMap(searchQuery);
+    //     return; 
+    // }
     
    
     // === PROCESSING CITY SEARCHES ===
+    searchByCity(searchQuery);
     makeCityGoogleMap(searchQuery);
 
 
