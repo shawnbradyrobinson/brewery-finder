@@ -82,6 +82,8 @@ function searchByCity(cityString){
             }
         }  
     cardContainer.innerHTML = brewBoxes;
+    //testing out the getDirections() function...
+    getDirections(data[0].city, data[0].name);
     })
     
 }
@@ -176,14 +178,8 @@ function processSearch(searchQuery){
     console.log("----------------");
     return searchQuery; 
 }
-/*NOTE FOR THURSDAY'S CLASS WITH THE TEAM...
-It seems like Google Maps API is doing a lot of the heavy lifting for us when it comes to the maps...really the only info we  *might* need from the OpenBreweryDB API are names/addresses of breweries, but even that it might just be easier to feed the search query "breweries in [insert city name]"
 
-OpenBreweryDB will still be helpful for outputting the cards, but I think we can drop the latitude and longitude stuff, honestly...unless there's a complication I"m overlooking. 
-
-
-*/ 
-//functions that creates an iframe dynamically and appends it to the correct region on screen 
+//functions that create an iframe dynamically and append it to the correct region on screen 
 //how to create an embedded Google Map based on a brewery type search query 
 function makeTypeGoogleMap(brewType){
     var googleMap = document.createElement("iframe");
@@ -230,20 +226,20 @@ function toggleMenu() {
     }
 }
 
-//var forecastBoxes = "";
-// for (let i = 7; i <= 39; i += 8) {
-//     forecastBoxes += `<div class="forecast-box">
-//           <h5>${newDate}</h5>
-//           <img src="http://openweathermap.org/img/w/${
-//             response.list[i].weather[0].icon
-//           }.png"/>
-//           <p>Temp: ${Math.round(response.list[i].main.temp)}°F</p>
-//           <p>Wind: ${Math.round(response.list[i].wind.speed)} MPH</p>
-//           <p>Humidity: ${response.list[i].main.humidity}%</p>
-//         </div>`;
-//   }
-//   forecastBoxContainer.innerHTML = forecastBoxes;
+//function --  in-line on the template literal of the cards -- that has a "get directions" event listener for the dynamically created button at the bottom of the card 
+// Article I read that helped me wrap my head around dynamic button: https://stackoverflow.com/questions/34896106/attach-event-to-dynamic-elements-in-javascript
+
+function getDirections(startLocation, endLocation){
+//makes a Google Map that switches from "?search" to "?directions" with the brewery info clicked on 
+    var googleMap = document.createElement("iframe");
+    googleMap.setAttribute("width", "100%");
+    googleMap.setAttribute("height", "100%");
+    googleMap.setAttribute("frameborder", "0");
+    googleMap.setAttribute("style", "border:0");
+    googleMap.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+    googleMap.setAttribute("src", "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&origin="+startLocation+"&destination="+endLocation);
+    mapView.append(googleMap);
+
+}
 
 
-    
-searchByCity("Houston");
