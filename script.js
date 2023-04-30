@@ -9,6 +9,10 @@ var breweryURL = "https://api.openbrewerydb.org/v1/breweries";
 var byCityURL = "https://api.openbrewerydb.org/v1/breweries?by_city=san_diego&per_page=10";
 var byTypeURL = "https://api.openbrewerydb.org/v1/breweries?by_type=micro&per_page=10";
 
+// === GLOBAL VARIABLES TO HANDLE EMBEDDED MAPS === 
+var googleMap = document.createElement("iframe");
+var mapAlreadyMade = false; 
+
 
 // === DOM OBJECTS === 
 var defaultSearch = document.querySelector("#default-search");
@@ -16,9 +20,7 @@ var searchButton = document.querySelector("#search-button");
 var mapView = document.querySelector("#map-view");
 var cardContainer = document.querySelector("#card-container");
 
-// === TEMPORARY(?) DOM OBJECTS === 
-
-
+// === SEARCH BUTTON EVENT LISTENER === 
 searchButton.addEventListener("click", function (event){
 event.preventDefault();
 console.log("button works!");
@@ -27,10 +29,39 @@ processSearch(defaultSearch.value);
 
 });
 
-//function to generate content onto the website's cards 
-function displayBrewCards(){
+//function to process the search query and channel it to the correct output...
+function processSearch(searchQuery){
+    // ==== PROCESSING BREW TYPE SEARCHES === 
+    //declares a variable that will hold the specific brew type, for searching purposes 
+    var brewType; 
+    //if the search was any of the following, then the user is doing a "type search"...so we'll run makeTypeGoogleMap()
+    if (searchQuery === "micro" || searchQuery === "nano" || searchQuery === "regional" || searchQuery === "brewpub" || searchQuery === "large" || searchQuery === "contract" || searchQuery === "proprietor"){
+        brewType = searchQuery;
+        console.log("We are inside the if statement and brewType equals " +brewType);
+        makeTypeGoogleMap(brewType);
+        return; 
+    }
 
+   
+    // // === PROCESSING BREWERY NAME SEARCHES === 
+    // // NOTE FOR TEAM: there has to be a more sophisticated answer to how to do this lol 
+    // if (searchQuery.includes("brewery")){
+    //     makeNameGoogleMap(searchQuery);
+    //     return; 
+    // }
+    
+   
+    // === PROCESSING CITY SEARCHES ===
+    searchByCity(searchQuery);
+    makeCityGoogleMap(searchQuery);
+
+    console.log("----------------");
+    console.log("Process Search() searchQuery= " +searchQuery);
+    console.log("----------------");
+    return searchQuery; 
 }
+
+// === SEARCH BY CITY FUNCTION === 
 function searchByCity(cityString){
     //Take a string from somewhere and feed it into the city search API Call...
     var byCityURL = "https://api.openbrewerydb.org/v1/breweries?by_city="+cityString+"&per_page=10";
@@ -59,7 +90,7 @@ function searchByCity(cityString){
         longitudeArray.push(data[i].longitude);
         console.log("");
         console.log("----------------");
-        var boxCount = 0; 
+        //creating dynamic Brewery Cards based on the city...
         var brewBoxes = "";
         for (z=0; z < 5; z++){
             brewBoxes += `<div id="brewery-card-1" class="max-w-xs p-2 bg-white border-4 border text-center border-gray-200  rounded-lg shadow dark:bg-gray-800 dark:border-gray-200">
@@ -79,24 +110,13 @@ function searchByCity(cityString){
             <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
         </div>` 
-            }
-        }  
+            } 
     cardContainer.innerHTML = brewBoxes;
-    getDirections(data[0].city, data[0].name);
+        }
     })
-    
-}
-
-function pullCoordinates(latitudeArray, longitudeArray){
-    for (j=0; j<latitudeArray.length; j++){
-        console.log("===== THIS IS FROM pullCoordinates Function! =====");
-        console.log(latitudeArray[j]);
-        console.log(longitudeArray[j]);
-        console.log("===============================================");
-    }
 
 }
-
+// === SEARCH BY TYPE FUNCTION === 
 function searchByType(typeString){
     console.log(typeString);
     breweryTypes = ["micro", "nano", "regional", "brewpub", "large", "planning", "bar", "contract", "proprietor", "closed"];
@@ -125,13 +145,9 @@ function searchByType(typeString){
             console.log("BREWERY TYPE: " +data[k].brewery_type);
             console.log("CITY + STATE: " +data[k].city+ ", " +data[k].state);
             console.log("LATITUDE: " +data[k].latitude);
-            latitudeArray.push(data[k].latitude);
             console.log("LONGITUDE: " +data[k].longitude);
-            longitudeArray.push(data[k].longitude);
             console.log("=====================");
 
-            
-        
 
         } 
     
@@ -140,54 +156,11 @@ function searchByType(typeString){
 
 }
 
-//function to process the search query and channel it to the correct output...
-function processSearch(searchQuery){
-    // ==== PROCESSING BREW TYPE SEARCHES === 
-    //declares a variable that will hold the specific brew type, for searching purposes 
-    var brewType; 
-    //if the search was any of the following, then the user is doing a "type search"...so we'll run makeTypeGoogleMap()
-    if (searchQuery === "micro" || searchQuery === "nano" || searchQuery === "regional" || searchQuery === "brewpub" || searchQuery === "large" || searchQuery === "contract" || searchQuery === "proprietor"){
-        brewType = searchQuery;
-        console.log("We are inside the if statement and brewType equals " +brewType);
-        makeTypeGoogleMap(brewType);
-        return; 
-    }
-
-   
-    // // === PROCESSING BREWERY NAME SEARCHES === 
-    // // NOTE FOR TEAM: there has to be a more sophisticated answer to how to do this lol 
-    // if (searchQuery.includes("brewery")){
-    //     makeNameGoogleMap(searchQuery);
-    //     return; 
-    // }
-    
-   
-    // === PROCESSING CITY SEARCHES ===
-    searchByCity(searchQuery);
-    makeCityGoogleMap(searchQuery);
-
-
-    // === PROCESSING BREWERY NAME SEARCHES === 
-    
-    
-
-
-    console.log("----------------");
-    console.log("Process Search() searchQuery= " +searchQuery);
-    console.log("----------------");
-    return searchQuery; 
-}
-/*NOTE FOR THURSDAY'S CLASS WITH THE TEAM...
-It seems like Google Maps API is doing a lot of the heavy lifting for us when it comes to the maps...really the only info we  *might* need from the OpenBreweryDB API are names/addresses of breweries, but even that it might just be easier to feed the search query "breweries in [insert city name]"
-
-OpenBreweryDB will still be helpful for outputting the cards, but I think we can drop the latitude and longitude stuff, honestly...unless there's a complication I"m overlooking. 
-
-
-*/ 
+ 
 //functions that creates an iframe dynamically and appends it to the correct region on screen 
 //how to create an embedded Google Map based on a brewery type search query 
 function makeTypeGoogleMap(brewType){
-    var googleMap = document.createElement("iframe");
+    // var googleMap = document.createElement("iframe");
     googleMap.setAttribute("width", "100%");
     googleMap.setAttribute("height", "100%");
     googleMap.setAttribute("frameborder", "0");
@@ -198,7 +171,7 @@ function makeTypeGoogleMap(brewType){
 }
 //how to create an embedded Google Map based on a city search query 
 function makeCityGoogleMap(searchQuery){
-    var googleMap = document.createElement("iframe");
+    // var googleMap = document.createElement("iframe");
     googleMap.setAttribute("width", "100%");
     googleMap.setAttribute("height", "100%");
     googleMap.setAttribute("frameborder", "0");
@@ -209,7 +182,7 @@ function makeCityGoogleMap(searchQuery){
 }
 
 function makeNameGoogleMap(searchQuery){
-    var googleMap = document.createElement("iframe");
+    // var googleMap = document.createElement("iframe");
     googleMap.setAttribute("width", "100%");
     googleMap.setAttribute("height", "100%");
     googleMap.setAttribute("frameborder", "0");
@@ -231,25 +204,10 @@ function toggleMenu() {
     }
 }
 
-//var forecastBoxes = "";
-// for (let i = 7; i <= 39; i += 8) {
-//     forecastBoxes += `<div class="forecast-box">
-//           <h5>${newDate}</h5>
-//           <img src="http://openweathermap.org/img/w/${
-//             response.list[i].weather[0].icon
-//           }.png"/>
-//           <p>Temp: ${Math.round(response.list[i].main.temp)}°F</p>
-//           <p>Wind: ${Math.round(response.list[i].wind.speed)} MPH</p>
-//           <p>Humidity: ${response.list[i].main.humidity}%</p>
-//         </div>`;
-//   }
-//   forecastBoxContainer.innerHTML = forecastBoxes;
-
-
     
 function getDirections(startLocation, endLocation){
   //makes a Google Map that switches from "?search" to "?directions" with the brewery info clicked on 
-      var googleMap = document.createElement("iframe");
+    //   var googleMap = document.createElement("iframe");
       googleMap.setAttribute("width", "100%");
       googleMap.setAttribute("height", "100%");
       googleMap.setAttribute("frameborder", "0");
@@ -259,5 +217,6 @@ function getDirections(startLocation, endLocation){
       mapView.append(googleMap);
   
   }
+
 
   //getCurrentPosition
