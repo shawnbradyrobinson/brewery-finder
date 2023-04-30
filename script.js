@@ -82,6 +82,7 @@ function searchByCity(cityString){
             }
         }  
     cardContainer.innerHTML = brewBoxes;
+    getDirections(data[0].city, data[0].name);
     })
     
 }
@@ -246,4 +247,17 @@ function toggleMenu() {
 
 
     
-searchByCity("Houston");
+function getDirections(startLocation, endLocation){
+  //makes a Google Map that switches from "?search" to "?directions" with the brewery info clicked on 
+      var googleMap = document.createElement("iframe");
+      googleMap.setAttribute("width", "100%");
+      googleMap.setAttribute("height", "100%");
+      googleMap.setAttribute("frameborder", "0");
+      googleMap.setAttribute("style", "border:0");
+      googleMap.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+      googleMap.setAttribute("src", "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&origin="+startLocation+"&destination="+endLocation);
+      mapView.append(googleMap);
+  
+  }
+
+  //getCurrentPosition
