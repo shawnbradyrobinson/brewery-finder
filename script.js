@@ -228,7 +228,6 @@ function makeNameGoogleMap(searchQuery){
 }
 
 
-
 // Hamburger Menu Toggle
 function toggleMenu() {
     var menu = document.getElementById('navbar-default');
@@ -246,38 +245,9 @@ searchButton.onclick = ()=> {
     mapCont.classList.add("activeMap");
 }
 
-/*var searchParameters = document.querySelector("#search-param");
-var map = new google.maps.Map(map-view, {
-
-});
-function newMap() {
-
+function clearMap() {
+var iframe = document.createElement('iframe');
+iframe.id = 'map-iframe';
+iframe.srcdoc = '';
 }
-searchParameters.addEventListener('change', newMap);
-
-google.maps.event.trigger(map, 'resize');
-
-$("#search-param").load()*/
-
-var map;
-var mapTypes = [makeTypeGoogleMap, makeCityGoogleMap, makeNameGoogleMap];
-var searchParameters = document.querySelector("#search-param");
-
-function combineTypes(functions) {
-    return function() {
-        for (var i = 0; i < functions.length; i++) {
-            functions[i]();
-        }
-    }
-}
-
-function reloadMapTypes() {
-    var combinedFunctions = combineTypes(mapTypes);
-    location.reload(combinedFunctions);
-}
-
-function newMap() {
-if (searchParameters.onfullscreenchange) {
-    location.reload(mapTypes); }
-}
-
+searchButton.addEventListener("click", clearMap);
