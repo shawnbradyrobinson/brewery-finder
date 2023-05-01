@@ -5,15 +5,16 @@ var mapsBaseURL = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCB3
 // info for geolocation stuff found here: https://www.freecodecamp.org/news/how-to-get-user-location-with-javascript-geolocation-api/#:~:text=How%20to%20Get%20User%20Location,consent%20to%20share%20their%20location.&text=Click%20Allow%2C%20and%20open%20up%20the%20developer%20console 
 //https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
 //https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API#examples
-var userLatitude; 
+var userLatitude = localStorage.getItem("USER_LAT");
+var userLongitude = localStorage.getItem("USER_LONG"); 
 var userLongitude; 
 const successCallback = (position) => {
-   userLatitude = position.coords.latitude;
-   userLongitude = position.coords.longitude; 
-   //LOCAL STORAGE
-   //LOCAL STORAGE
-   console.log(userLatitude);
-   console.log(userLongitude);
+   var lat = position.coords.latitude;
+   var long = position.coords.longitude; 
+   console.log(lat);
+   console.log(long);
+   userLatitude = localStorage.setItem("USER_LAT", lat);
+   userLongitude = localStorage.setItem("USER_LONG", long);
   };
   
   const errorCallback = (error) => {
@@ -23,6 +24,7 @@ const successCallback = (position) => {
  navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
 console.log("TESTING USER LATITUDE: " +userLatitude);
+console.log("TESTING USER LONGITUDE: " +userLongitude);
 
 
 
@@ -231,7 +233,7 @@ function toggleMenu() {
 }
 
     
-function getDirections(startLocation, endLocation){
+function getDirections(userLatitude, userLongitude, endLocation){
   //makes a Google Map that switches from "?search" to "?directions" with the brewery info clicked on 
     //   var googleMap = document.createElement("iframe");
       googleMap.setAttribute("width", "100%");
@@ -239,10 +241,10 @@ function getDirections(startLocation, endLocation){
       googleMap.setAttribute("frameborder", "0");
       googleMap.setAttribute("style", "border:0");
       googleMap.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
-      googleMap.setAttribute("src", "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&origin="+startLocation+"&destination="+endLocation);
+      googleMap.setAttribute("src", "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&origin="+userLatitude+","+userLongitude+"&destination="+endLocation);
       mapView.append(googleMap);
   
   }
 
-
-  //getCurrentPosition
+//A hard-coded example of current position working...feel free to comment out if you need to see the standard program work! -Shawn 
+  getDirections(userLatitude, userLongitude, "Houston");
