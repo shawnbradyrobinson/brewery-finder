@@ -1,8 +1,33 @@
 // === GOOGLE MAPS API STUFF === 
 var mapsBaseURL = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&origin=START_ADDRESS&destination=END_ADDRESS";
 
-// === YELP API KEY === 
-//https://api.yelp.com/v3//businesses/search/jxVJwFjiQiHX0VrDrtPP-KStC0OljNvuhH1e43RkAJZ0aZNeq6MzybosiCpMdQiP8GolAiFP2qLWhG6ed2fmTR24jaMST3xiVxgjhzUlREEEqjgfautl_I1KEQRLZHYx
+// === NAVIGATOR GEOLOCATION STUFF === 
+// info for geolocation stuff found here: https://www.freecodecamp.org/news/how-to-get-user-location-with-javascript-geolocation-api/#:~:text=How%20to%20Get%20User%20Location,consent%20to%20share%20their%20location.&text=Click%20Allow%2C%20and%20open%20up%20the%20developer%20console 
+//https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+//https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API#examples
+var userLatitude; 
+var userLongitude; 
+const successCallback = (position) => {
+   userLatitude = position.coords.latitude;
+   userLongitude = position.coords.longitude; 
+   //LOCAL STORAGE
+   //LOCAL STORAGE
+   console.log(userLatitude);
+   console.log(userLongitude);
+  };
+  
+  const errorCallback = (error) => {
+    console.log(error);
+  };
+  
+ navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
+console.log("TESTING USER LATITUDE: " +userLatitude);
+
+
+
+
+
 // === OPENBREWERYDB API STUFF === 
 //LIST OF "BOILERPLATE" API Calls from OpenBreweryDB 
 var breweryURL = "https://api.openbrewerydb.org/v1/breweries";
@@ -52,8 +77,10 @@ function processSearch(searchQuery){
     
    
     // === PROCESSING CITY SEARCHES ===
-    searchByCity(searchQuery);
+    searchByCity(searchQuery); // I don't know why the program needs this to be here twice, but...
     makeCityGoogleMap(searchQuery);
+    searchByCity(searchQuery); // when I get rid of one of these calls, then the function doesn't run...
+    //If your code is broken, then maybe get rid of one of these and it might work -Shawn 
 
     console.log("----------------");
     console.log("Process Search() searchQuery= " +searchQuery);
@@ -66,7 +93,6 @@ function searchByCity(cityString){
     //Take a string from somewhere and feed it into the city search API Call...
     var byCityURL = "https://api.openbrewerydb.org/v1/breweries?by_city="+cityString+"&per_page=10";
     
-
     fetch (byCityURL)
     .then(function (response){
     
