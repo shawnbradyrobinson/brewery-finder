@@ -145,6 +145,46 @@ function searchByCity(cityString){
             } 
     cardContainer.innerHTML = brewBoxes;
         }
+        var directionButton1 = document.querySelector("#brewery-directions-0");
+        var directionButton2 = document.querySelector("#brewery-directions-1");
+        var directionButton3 = document.querySelector("#brewery-directions-2");
+        var directionButton4 = document.querySelector("#brewery-directions-3");
+        var directionButton5 = document.querySelector("#brewery-directions-4");
+
+        directionButton1.addEventListener("click", function(){
+            getDirections(userLatitude, userLongitude, "Houston");
+
+
+
+        })
+
+        directionButton2.addEventListener("click", function(){
+            getDirections(userLatitude, userLongitude, "Portland");
+
+
+
+        })
+
+        directionButton3.addEventListener("click", function(){
+            getDirections(userLatitude, userLongitude, "Orlando");
+
+
+
+        })
+
+        directionButton4.addEventListener("click", function(){
+            getDirections(userLatitude, userLongitude, "Boston");
+
+
+
+        })
+
+        directionButton5.addEventListener("click", function(){
+            getDirections(userLatitude, userLongitude, "Toronto");
+
+
+
+        })
     })
 
 }
