@@ -47,8 +47,8 @@ var searchButton = document.querySelector("#search-button");
 var mapView = document.querySelector("#map-view");
 var cardContainer = document.querySelector("#card-container");
 var mapCont = document.querySelector(".map-cont");
-var navMapView = document.querySelector("a[href='#mapview']");
-var bottomNavMap = document.querySelector("footer" , "a[href='#mapview']");
+var navMapView = document.querySelector(".navmap1");
+var bottomNavMap = document.querySelector(".navmap2");
 
 // === SEARCH BUTTON EVENT LISTENER === 
 searchButton.addEventListener("click", function (event){
@@ -294,25 +294,35 @@ function getDirections(userLatitude, userLongitude, endLocation){
 
 //Hides the map container unless any of these 3 buttons on the page are clicked
   searchButton.onclick = ()=> {
-    mapCont.classList.add("activeMap");
+    mapCont.classList.add("activeMap")
+    showMapButtons();
+
+      function showMapButtons() {
+          navMapView.classList.add("activeView")
+          bottomNavMap.classList.add("activeView")
+      };
   }
 
-  navMapView.onclick = ()=> {
-    mapCont.classList.add("activeMap");
-  }
+//   navMapView.onclick = ()=> {
+//     mapCont.classList.add("activeMap");
+//   }
 
-  bottomNavMap.onclick = ()=> {
-    mapCont.classList.add("activeMap");
-  }
+//   bottomNavMap.onclick = ()=> {
+//     mapCont.classList.add("activeMap");
+//   }
 
-  function showMapButtons() {
-    if (navMapView.style.cssText="display: none",
-    bottomNavMap.style.cssText="display:none") {
-        navMapView.style.cssText="display:block",
-        bottomNavMap.style.cssText="display:block"
-    } else {
-        navMapView.style.cssText="display:none",
-        bottomNavMap.style.cssText="display:none"
-    }
-}
-searchButton.addEventListener("click", showMapButtons);
+//   function showMapButtons() {
+//     // if (navMapView.style.cssText="display:none") {
+//     //     navMapView.style.cssText="display:block";
+//     // } else {
+//     //     navMapView.style.cssText="display:none";
+//     // }
+//     if (navMapView.style.cssText="display: none",
+//     bottomNavMap.style.cssText="display:none") {
+//         navMapView.style.cssText="display:block",
+//         bottomNavMap.style.cssText="display:flex";
+//     } else {
+//         navMapView.style.cssText="display:none",
+//         bottomNavMap.style.cssText="display:none";
+//     }
+// }

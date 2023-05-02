@@ -8,6 +8,8 @@ font-weight: 600;
     text-align: center;
 }
 
+
+
 #searchBar, #searchBtn {
     display: inline-flex;
     align-items: center;
@@ -21,10 +23,26 @@ font-weight: 600;
 .map-cont.activeMap {
     display: block;
 }
+
 img {
     object-fit: cover;
 }
 
-li a.navmap {
+li a.navmap1, 
+li a.navmap2 {
     display: none;
+}
+
+li a.navmap1.activeView  {
+    display: block;
+    color: white;
+    padding: 15px, 0px;
+}
+
+li a.navmap2.activeView {
+    display: block;
+    margin-right: 17px;
+    /* sm:mr-0 
+    hover:underline 
+    md:mr-6 */
 }
