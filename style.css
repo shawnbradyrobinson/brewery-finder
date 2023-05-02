@@ -13,6 +13,14 @@ font-weight: 600;
     align-items: center;
     justify-items: center;
 }
+
+.map-cont {
+    display: none;
+}
+
+.map-cont.activeMap {
+    display: block;
+}
 img {
     object-fit: cover;
 }
