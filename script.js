@@ -152,35 +152,35 @@ function searchByCity(cityString){
         var directionButton5 = document.querySelector("#brewery-directions-4");
 
         directionButton1.addEventListener("click", function(){
-            getDirections(userLatitude, userLongitude, ""+data[0].address_1+","+data[0].state);
+            getDirections(localStorage.getItem("USER_LAT"), localStorage.getItem("USER_LONG"), ""+data[0].address_1+","+","+data[0].city+","+data[0].state);
 
 
 
         })
 
         directionButton2.addEventListener("click", function(){
-            getDirections(userLatitude, userLongitude, ""+data[1].address_1+","+data[1].state);
+            getDirections(localStorage.getItem("USER_LAT"), localStorage.getItem("USER_LONG"), ""+data[1].address_1+","+","+data[1].city+","+data[1].state);
 
 
 
         })
 
         directionButton3.addEventListener("click", function(){
-            getDirections(userLatitude, userLongitude, ""+data[2].address_1+","+data[2].state);
+            getDirections(localStorage.getItem("USER_LAT"), localStorage.getItem("USER_LONG"), ""+data[2].address_1+","+","+data[2].city+","+data[2].state);
 
 
 
         })
 
         directionButton4.addEventListener("click", function(){
-            getDirections(userLatitude, userLongitude, ""+data[3].address_1+","+data[3].state);
+            getDirections(localStorage.getItem("USER_LAT"), localStorage.getItem("USER_LONG"), ""+data[3].address_1+","+","+data[3].city+","+data[3].state);
 
 
 
         })
 
         directionButton5.addEventListener("click", function(){
-            getDirections(userLatitude, userLongitude, ""+data[4].address_1+","+data[4].state);
+            getDirections(localStorage.getItem("USER_LAT"), localStorage.getItem("USER_LONG"), ""+data[4].address_1+","+","+data[4].city+","+data[4].state);
 
 
 
@@ -279,6 +279,9 @@ function toggleMenu() {
 function getDirections(userLatitude, userLongitude, endLocation){
   //makes a Google Map that switches from "?search" to "?directions" with the brewery info clicked on 
     //   var googleMap = document.createElement("iframe");
+      console.log("FROM GET DIRECTIONS ----------");
+      console.log(JSON.parse(userLatitude));
+      console.log(userLongitude);
       googleMap.setAttribute("width", "100%");
       googleMap.setAttribute("height", "100%");
       googleMap.setAttribute("frameborder", "0");
@@ -288,6 +291,8 @@ function getDirections(userLatitude, userLongitude, endLocation){
       mapView.append(googleMap);
   
   }
+
+
 
 //A hard-coded example of current position working...feel free to comment out if you need to see the standard program work! -Shawn 
   getDirections(userLatitude, userLongitude, "Houston");
