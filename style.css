@@ -24,3 +24,7 @@ font-weight: 600;
 img {
     object-fit: cover;
 }
+
+li a.navmap {
+    display: none;
+}

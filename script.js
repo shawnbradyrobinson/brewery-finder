@@ -304,3 +304,15 @@ function getDirections(userLatitude, userLongitude, endLocation){
   bottomNavMap.onclick = ()=> {
     mapCont.classList.add("activeMap");
   }
+
+  function showMapButtons() {
+    if (navMapView.style.cssText="display: none",
+    bottomNavMap.style.cssText="display:none") {
+        navMapView.style.cssText="display:block",
+        bottomNavMap.style.cssText="display:block"
+    } else {
+        navMapView.style.cssText="display:none",
+        bottomNavMap.style.cssText="display:none"
+    }
+}
+searchButton.addEventListener("click", showMapButtons);
