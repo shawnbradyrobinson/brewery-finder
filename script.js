@@ -125,7 +125,7 @@ function searchByCity(cityString){
         //creating dynamic Brewery Cards based on the city...
         var brewBoxes = "";
         for (z=0; z < 5; z++){
-            brewBoxes += `<div id="brewery-card-1" class="max-w-xs p-2 bg-white border-4 border text-center border-gray-200  rounded-lg shadow dark:bg-gray-800 dark:border-gray-200">
+            brewBoxes += `<div id="brewery-card-${z}" class="max-w-xs p-2 bg-white border-4 border text-center border-gray-200  rounded-lg shadow dark:bg-gray-800 dark:border-gray-200">
             <a href="#">
             <h5 id="brewery-name-1" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">${data[z].name}</h5>
             <img src="./images/BrewFinderLogo.svg" class="h-8 mr-3 m-2 inline-flex justify-center" alt="BrewFinder Logo" />

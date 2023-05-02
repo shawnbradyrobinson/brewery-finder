@@ -21,3 +21,6 @@ font-weight: 600;
 .map-cont.activeMap {
     display: block;
 }
+img {
+    object-fit: cover;
+}
