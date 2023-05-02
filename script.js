@@ -46,6 +46,9 @@ var defaultSearch = document.querySelector("#default-search");
 var searchButton = document.querySelector("#search-button");
 var mapView = document.querySelector("#map-view");
 var cardContainer = document.querySelector("#card-container");
+var mapCont = document.querySelector(".map-cont");
+var navMapView = document.querySelector("a[href='#map-view']");
+var bottomNavMap = document.querySelector("footer" , "a[href='#map-view']");
 
 // === SEARCH BUTTON EVENT LISTENER === 
 searchButton.addEventListener("click", function (event){
@@ -118,6 +121,7 @@ function searchByCity(cityString){
         longitudeArray.push(data[i].longitude);
         console.log("");
         console.log("----------------");
+
         //creating dynamic Brewery Cards based on the city...
         var brewBoxes = "";
         for (z=0; z < 5; z++){
@@ -247,3 +251,16 @@ function getDirections(userLatitude, userLongitude, endLocation){
 
 //A hard-coded example of current position working...feel free to comment out if you need to see the standard program work! -Shawn 
   getDirections(userLatitude, userLongitude, "Houston");
+
+//Hides the map container unless any of these 3 buttons on the page are clicked
+  searchButton.onclick = ()=> {
+    mapCont.classList.add("activeMap");
+  }
+
+  navMapView.onclick = ()=> {
+    mapCont.classList.add("activeMap");
+  }
+
+  bottomNavMap.onclick = ()=> {
+    mapCont.classList.add("activeMap");
+  }
