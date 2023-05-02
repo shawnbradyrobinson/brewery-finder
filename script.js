@@ -47,8 +47,8 @@ var searchButton = document.querySelector("#search-button");
 var mapView = document.querySelector("#map-view");
 var cardContainer = document.querySelector("#card-container");
 var mapCont = document.querySelector(".map-cont");
-var navMapView = document.querySelector("a[href='#map-view']");
-var bottomNavMap = document.querySelector("footer" , "a[href='#map-view']");
+var navMapView = document.querySelector("a[href='#mapview']");
+var bottomNavMap = document.querySelector("footer" , "a[href='#mapview']");
 
 // === SEARCH BUTTON EVENT LISTENER === 
 searchButton.addEventListener("click", function (event){
