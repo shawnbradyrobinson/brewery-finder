@@ -137,7 +137,7 @@ function searchByCity(cityString){
                 Checkout their website
                 <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path></svg>
             </a>
-            <button id="brewery-directions-1" type="button" class="text-white m-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <button id="brewery-directions-${z}" type="button" class="text-white m-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             Get Directions
             <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
@@ -145,6 +145,46 @@ function searchByCity(cityString){
             } 
     cardContainer.innerHTML = brewBoxes;
         }
+        var directionButton1 = document.querySelector("#brewery-directions-0");
+        var directionButton2 = document.querySelector("#brewery-directions-1");
+        var directionButton3 = document.querySelector("#brewery-directions-2");
+        var directionButton4 = document.querySelector("#brewery-directions-3");
+        var directionButton5 = document.querySelector("#brewery-directions-4");
+
+        directionButton1.addEventListener("click", function(){
+            getDirections(userLatitude, userLongitude, ""+data[0].address_1+","+data[0].state);
+
+
+
+        })
+
+        directionButton2.addEventListener("click", function(){
+            getDirections(userLatitude, userLongitude, ""+data[1].address_1+","+data[1].state);
+
+
+
+        })
+
+        directionButton3.addEventListener("click", function(){
+            getDirections(userLatitude, userLongitude, ""+data[2].address_1+","+data[2].state);
+
+
+
+        })
+
+        directionButton4.addEventListener("click", function(){
+            getDirections(userLatitude, userLongitude, ""+data[3].address_1+","+data[3].state);
+
+
+
+        })
+
+        directionButton5.addEventListener("click", function(){
+            getDirections(userLatitude, userLongitude, ""+data[4].address_1+","+data[4].state);
+
+
+
+        })
     })
 
 }
