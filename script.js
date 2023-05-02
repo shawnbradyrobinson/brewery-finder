@@ -287,7 +287,7 @@ function getDirections(userLatitude, userLongitude, endLocation){
       googleMap.setAttribute("frameborder", "0");
       googleMap.setAttribute("style", "border:0");
       googleMap.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
-      googleMap.setAttribute("src", "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&origin=39.2487322,-94.6453579&destination="+endLocation);
+      googleMap.setAttribute("src", "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCB3lXQUe3SeV0zKPvqYYzjp89i2YaNETA&origin="+userLatitude+","+userLongitude+"&destination="+endLocation);
       mapView.append(googleMap);
   
   }
