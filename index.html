@@ -29,8 +29,8 @@
 <div class="bg-gray-100">
   <div class="h-screen bg-gray-100 dark:bg-gray-800">
       <nav class="bg-white border-gray-200 dark:bg-gray-900">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="#" class="flex items-center">
+        <div id="home" class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+          <a href="#home" class="flex items-center">
             <img src="./images/BrewFinderLogo.svg" class="h-8 mr-3" alt="BrewFinder Logo" />
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">BrewFinder</span>
           </a>
@@ -44,27 +44,22 @@
               <ul
                 class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
-                  <a href="#"
+                  <a href="#home"
                     class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
                     aria-current="page">Home</a>
                 </li>
                 <li>
-                  <a href="#"
-                    class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About
-                    Us</a>
-                </li>
-                <li>
-                  <a href="#"
+                  <a href="#mapview"
                     class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Map
                     View</a>
                 </li>
                 <li>
-                  <a href="#"
-                    class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">List
-                    View</a>
+                  <a href="#about"
+                    class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About
+                    Us</a>
                 </li>
                 <li>
-                  <a href="#"
+                  <a href="#contact"
                     class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
                 </li>
               </ul>
@@ -131,7 +126,7 @@
     </div>
     
   
-  <div class="h-screen bg-gray-100 dark:bg-gray-800">
+  <div id="mapview" class="h-screen bg-gray-100 dark:bg-gray-800">
     <!-- Map Input Placeholder------------------------------------------------------------------------------------ -->
     <div class="bg-gray-100 dark:bg-gray-800 py-10">
       <div class="container mx-auto px-4">
@@ -148,7 +143,7 @@
   
   
   <!-- About Us--------------------------------------------------------------------------------------------- -->
-  <div class="h-screen bg-gray-100 dark:bg-gray-800">
+  <div id="about" class="h-screen bg-gray-100 dark:bg-gray-800">
     <section class="bg-white dark:bg-gray-900">
       <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-8 lg:px-6 ">
           <div class="mx-auto max-w-screen-sm text-center mb-8 lg:mb-12">
@@ -298,7 +293,7 @@
   </div>
   
   <!-- Contact Us ---------------------------------------------------------------------------------------- -->
-  <div class="h-screen bg-gray-100 dark:bg-gray-800">
+  <div id="contact" class="h-screen bg-gray-100 dark:bg-gray-800">
     <section class="bg-white dark:bg-gray-800">
       <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
           <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Us</h2>
@@ -334,16 +329,16 @@
     </span>
     <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
       <li>
-        <a href="#" class="mr-4 hover:underline md:mr-6">Home</a>
+        <a href="#home" class="mr-4 hover:underline md:mr-6">Home</a>
       </li>
       <li>
-        <a href="#" class="mr-4 hover:underline md:mr-6">About Us</a>
+        <a href="#mapview" class="mr-4 hover:underline md:mr-6">Map View</a>
       </li>
       <li>
-        <a href="#" class="mr-4 hover:underline md:mr-6">Map View</a>
+        <a href="#about" class="mr-4 hover:underline md:mr-6">About Us</a>
       </li>
       <li>
-        <a href="#" class="hover:underline">List View</a>
+        <a href="#contact" class="hover:underline">Contact Us</a>
       </li>
     </ul>
   </footer>
