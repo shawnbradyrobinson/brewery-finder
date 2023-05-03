@@ -5,6 +5,8 @@ var mapsBaseURL = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCB3
 // info for geolocation stuff found here: https://www.freecodecamp.org/news/how-to-get-user-location-with-javascript-geolocation-api/#:~:text=How%20to%20Get%20User%20Location,consent%20to%20share%20their%20location.&text=Click%20Allow%2C%20and%20open%20up%20the%20developer%20console 
 //https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
 //https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API#examples
+
+
 var userLatitude = localStorage.getItem("USER_LAT");
 var userLongitude = localStorage.getItem("USER_LONG"); 
 var userLongitude; 
@@ -13,6 +15,7 @@ const successCallback = (position) => {
    var long = position.coords.longitude; 
    console.log(lat);
    console.log(long);
+   //On a successful callback of the user's location data, set our local storage items to that data. 
    userLatitude = localStorage.setItem("USER_LAT", lat);
    userLongitude = localStorage.setItem("USER_LONG", long);
   };
@@ -28,24 +31,21 @@ console.log("TESTING USER LONGITUDE: " +userLongitude);
 
 
 
-
-
-// === OPENBREWERYDB API STUFF === 
-//LIST OF "BOILERPLATE" API Calls from OpenBreweryDB 
-var breweryURL = "https://api.openbrewerydb.org/v1/breweries";
-var byCityURL = "https://api.openbrewerydb.org/v1/breweries?by_city=san_diego&per_page=10";
-var byTypeURL = "https://api.openbrewerydb.org/v1/breweries?by_type=micro&per_page=10";
-
 // === GLOBAL VARIABLES TO HANDLE EMBEDDED MAPS === 
 var googleMap = document.createElement("iframe");
 var mapAlreadyMade = false; 
 
 
 // === DOM OBJECTS === 
+//search field 
 var defaultSearch = document.querySelector("#default-search");
+//search button 
 var searchButton = document.querySelector("#search-button");
+//This is the container that holds the embedded map when it is generated
 var mapView = document.querySelector("#map-view");
+//This is the container that holds the brew cards when they are generated
 var cardContainer = document.querySelector("#card-container");
+//DOM Objects for map and nav hiding prior to a search happening 
 var mapCont = document.querySelector(".map-cont");
 var navMapView = document.querySelector(".navmap1");
 var bottomNavMap = document.querySelector(".navmap2");
@@ -70,22 +70,13 @@ function processSearch(searchQuery){
         console.log("We are inside the if statement and brewType equals " +brewType);
         makeTypeGoogleMap(brewType);
         return; 
-    }
-
-   
-    // // === PROCESSING BREWERY NAME SEARCHES === 
-    // // NOTE FOR TEAM: there has to be a more sophisticated answer to how to do this lol 
-    // if (searchQuery.includes("brewery")){
-    //     makeNameGoogleMap(searchQuery);
-    //     return; 
-    // }
-    
+    }    
    
     // === PROCESSING CITY SEARCHES ===
-    searchByCity(searchQuery); // I don't know why the program needs this to be here twice, but...
+    searchByCity(searchQuery); 
     makeCityGoogleMap(searchQuery);
-    searchByCity(searchQuery); // when I get rid of one of these calls, then the function doesn't run...
-    //If your code is broken, then maybe get rid of one of these and it might work -Shawn 
+    searchByCity(searchQuery); //This is called twice because it solved a glitch the program was having -Shawn 
+    
 
     console.log("----------------");
     console.log("Process Search() searchQuery= " +searchQuery);
@@ -122,7 +113,7 @@ function searchByCity(cityString){
         console.log("");
         console.log("----------------");
 
-        //creating dynamic Brewery Cards based on the city...
+        //creating dynamic Brewery Cards based on the city. Every card gets a unique ID so it can then be accessed later to have separate card buttons run separate functions 
         var brewBoxes = "";
         for (z=0; z < 5; z++){
             brewBoxes += `<div id="brewery-card-${z}" class="max-w-xs p-2 bg-white border-4 border text-center border-gray-200  rounded-lg shadow dark:bg-gray-800 dark:border-gray-200">
@@ -145,12 +136,14 @@ function searchByCity(cityString){
             } 
     cardContainer.innerHTML = brewBoxes;
         }
+        //DOM Objects for the "Get Directions" buttons
         var directionButton1 = document.querySelector("#brewery-directions-0");
         var directionButton2 = document.querySelector("#brewery-directions-1");
         var directionButton3 = document.querySelector("#brewery-directions-2");
         var directionButton4 = document.querySelector("#brewery-directions-3");
         var directionButton5 = document.querySelector("#brewery-directions-4");
 
+        //every button calls in the getDirections() function, passing in the appropriate address data from the card 
         directionButton1.addEventListener("click", function(){
             getDirections(localStorage.getItem("USER_LAT"), localStorage.getItem("USER_LONG"), ""+data[0].address_1+","+","+data[0].city+","+data[0].state);
 
@@ -291,11 +284,6 @@ function getDirections(userLatitude, userLongitude, endLocation){
       mapView.append(googleMap);
   
   }
-
-
-
-//A hard-coded example of current position working...feel free to comment out if you need to see the standard program work! -Shawn 
-  getDirections(userLatitude, userLongitude, "Houston");
 
 //Hides the map container + map view anchors unless search button is clicked
 mapCont.style.display = "none";
