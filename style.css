@@ -16,33 +16,22 @@ font-weight: 600;
     justify-items: center;
 }
 
-.map-cont {
-    display: none;
-}
-
-.map-cont.activeMap {
-    display: block;
-}
-
 img {
     object-fit: cover;
 }
 
-li a.navmap1, 
-li a.navmap2 {
-    display: none;
-}
-
-li a.navmap1.activeView  {
-    display: block;
+li a.navmap1 {
     color: white;
-    padding: 15px, 0px;
 }
 
-li a.navmap2.activeView {
-    display: block;
-    margin-right: 17px;
-    /* sm:mr-0 
-    hover:underline 
-    md:mr-6 */
+li a.navmap1:hover {
+    color: #3b82f6;
+}
+
+li a.navmap2 {
+    margin-right: 20px;
+}
+
+li a.navmap2:hover {
+    text-decoration: underline;
 }

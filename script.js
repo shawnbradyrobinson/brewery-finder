@@ -297,37 +297,17 @@ function getDirections(userLatitude, userLongitude, endLocation){
 //A hard-coded example of current position working...feel free to comment out if you need to see the standard program work! -Shawn 
   getDirections(userLatitude, userLongitude, "Houston");
 
-//Hides the map container unless any of these 3 buttons on the page are clicked
-  searchButton.onclick = ()=> {
-    mapCont.classList.add("activeMap")
-    showMapButtons();
+//Hides the map container + map view anchors unless search button is clicked
+mapCont.style.display = "none";
+navMapView.style.display = "none";
+bottomNavMap.style.display = "none";
 
-      function showMapButtons() {
-          navMapView.classList.add("activeView")
-          bottomNavMap.classList.add("activeView")
-      };
-  }
+function showMapStuff() {
+    mapCont.style.display = "";
+    navMapView.style.display = "";
+    bottomNavMap.style.display = "";
+}  
 
-//   navMapView.onclick = ()=> {
-//     mapCont.classList.add("activeMap");
-//   }
-
-//   bottomNavMap.onclick = ()=> {
-//     mapCont.classList.add("activeMap");
-//   }
-
-//   function showMapButtons() {
-//     // if (navMapView.style.cssText="display:none") {
-//     //     navMapView.style.cssText="display:block";
-//     // } else {
-//     //     navMapView.style.cssText="display:none";
-//     // }
-//     if (navMapView.style.cssText="display: none",
-//     bottomNavMap.style.cssText="display:none") {
-//         navMapView.style.cssText="display:block",
-//         bottomNavMap.style.cssText="display:flex";
-//     } else {
-//         navMapView.style.cssText="display:none",
-//         bottomNavMap.style.cssText="display:none";
-//     }
-// }
+searchButton.onclick = ()=> {
+    showMapStuff();
+}
