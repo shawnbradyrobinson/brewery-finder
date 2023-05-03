@@ -87,7 +87,7 @@ function processSearch(searchQuery){
 // === SEARCH BY CITY FUNCTION === 
 function searchByCity(cityString){
     //Take a string from somewhere and feed it into the city search API Call...
-    var byCityURL = "https://api.openbrewerydb.org/v1/breweries?by_city="+cityString+"&per_page=10";
+    var byCityURL = "https://api.openbrewerydb.org/v1/breweries?by_city="+cityString+"&per_page=30";
     
     fetch (byCityURL)
     .then(function (response){
