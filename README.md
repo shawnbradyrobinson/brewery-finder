@@ -10,9 +10,11 @@ N/a
 
 ## Credits
 Open Brewery Database API <br>
-Google Maps API <br>
+Geolocation API  <br>
+Google Embedded Maps API <br>
 Tailwind CSS <br>
-Flowbite - Tailwind Components
+Flowbite - Tailwind Components <br>
+Fisher-Yates Shuffle Algorithm 
 
 ## Contributors
 Shawn Robinson<br>

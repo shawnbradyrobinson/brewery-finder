@@ -112,6 +112,14 @@ function searchByCity(cityString){
         longitudeArray.push(data[i].longitude);
         console.log("");
         console.log("----------------");
+        console.log("===== SHUFFLE DATA ======");
+        shuffle(data);
+        console.log("BREWERY NAME: " +data[i].name);
+        console.log("ADDRESS: " +data[i].address_1); 
+        console.log("CITY + STATE: " +data[i].city+ ", " +data[i].state);
+        console.log("LATITUDE: " +data[i].latitude);
+        latitudeArray.push(data[i].latitude);
+        console.log("LONGITUDE: " +data[i].longitude);
 
         //creating dynamic Brewery Cards based on the city. Every card gets a unique ID so it can then be accessed later to have separate card buttons run separate functions 
         var brewBoxes = "";
@@ -299,3 +307,23 @@ function showMapStuff() {
 searchButton.onclick = ()=> {
     showMapStuff();
 }
+
+//Array shuffle function 
+//Source: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
