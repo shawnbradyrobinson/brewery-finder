@@ -8,19 +8,30 @@ font-weight: 600;
     text-align: center;
 }
 
+
+
 #searchBar, #searchBtn {
     display: inline-flex;
     align-items: center;
     justify-items: center;
 }
 
-.map-cont {
-    display: none;
-}
-
-.map-cont.activeMap {
-    display: block;
-}
 img {
     object-fit: cover;
+}
+
+li a.navmap1 {
+    color: white;
+}
+
+li a.navmap1:hover {
+    color: #3b82f6;
+}
+
+li a.navmap2 {
+    margin-right: 20px;
+}
+
+li a.navmap2:hover {
+    text-decoration: underline;
 }

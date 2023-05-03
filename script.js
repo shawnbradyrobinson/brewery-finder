@@ -47,8 +47,8 @@ var searchButton = document.querySelector("#search-button");
 var mapView = document.querySelector("#map-view");
 var cardContainer = document.querySelector("#card-container");
 var mapCont = document.querySelector(".map-cont");
-var navMapView = document.querySelector("a[href='#mapview']");
-var bottomNavMap = document.querySelector("footer" , "a[href='#mapview']");
+var navMapView = document.querySelector(".navmap1");
+var bottomNavMap = document.querySelector(".navmap2");
 
 // === SEARCH BUTTON EVENT LISTENER === 
 searchButton.addEventListener("click", function (event){
@@ -297,15 +297,17 @@ function getDirections(userLatitude, userLongitude, endLocation){
 //A hard-coded example of current position working...feel free to comment out if you need to see the standard program work! -Shawn 
   getDirections(userLatitude, userLongitude, "Houston");
 
-//Hides the map container unless any of these 3 buttons on the page are clicked
-  searchButton.onclick = ()=> {
-    mapCont.classList.add("activeMap");
-  }
+//Hides the map container + map view anchors unless search button is clicked
+mapCont.style.display = "none";
+navMapView.style.display = "none";
+bottomNavMap.style.display = "none";
 
-  navMapView.onclick = ()=> {
-    mapCont.classList.add("activeMap");
-  }
+function showMapStuff() {
+    mapCont.style.display = "";
+    navMapView.style.display = "";
+    bottomNavMap.style.display = "";
+}  
 
-  bottomNavMap.onclick = ()=> {
-    mapCont.classList.add("activeMap");
-  }
+searchButton.onclick = ()=> {
+    showMapStuff();
+}
