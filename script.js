@@ -13,8 +13,6 @@ var userLongitude;
 const successCallback = (position) => {
    var lat = position.coords.latitude;
    var long = position.coords.longitude; 
-   console.log(lat);
-   console.log(long);
    //On a successful callback of the user's location data, set our local storage items to that data. 
    userLatitude = localStorage.setItem("USER_LAT", lat);
    userLongitude = localStorage.setItem("USER_LONG", long);
@@ -26,8 +24,6 @@ const successCallback = (position) => {
   
  navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
-console.log("TESTING USER LATITUDE: " +userLatitude);
-console.log("TESTING USER LONGITUDE: " +userLongitude);
 
 
 
@@ -53,8 +49,6 @@ var bottomNavMap = document.querySelector(".navmap2");
 // === SEARCH BUTTON EVENT LISTENER === 
 searchButton.addEventListener("click", function (event){
 event.preventDefault();
-console.log("button works!");
-console.log("SEARCH VALUE: " +defaultSearch.value);
 processSearch(defaultSearch.value);
 
 });
@@ -67,7 +61,6 @@ function processSearch(searchQuery){
     //if the search was any of the following, then the user is doing a "type search"...so we'll run makeTypeGoogleMap()
     if (searchQuery === "micro" || searchQuery === "nano" || searchQuery === "regional" || searchQuery === "brewpub" || searchQuery === "large" || searchQuery === "contract" || searchQuery === "proprietor"){
         brewType = searchQuery;
-        console.log("We are inside the if statement and brewType equals " +brewType);
         makeTypeGoogleMap(brewType);
         return; 
     }    
@@ -77,10 +70,6 @@ function processSearch(searchQuery){
     makeCityGoogleMap(searchQuery);
     searchByCity(searchQuery); //This is called twice because it solved a glitch the program was having -Shawn 
     
-
-    console.log("----------------");
-    console.log("Process Search() searchQuery= " +searchQuery);
-    console.log("----------------");
     return searchQuery; 
 }
 
@@ -101,25 +90,10 @@ function searchByCity(cityString){
     var latitudeArray = [];
     var longitudeArray = [];
     for (i=0; i<data.length; i++){
-        console.log(data);
-        console.log("--------------");
-        console.log("BREWERY NAME: " +data[i].name);
-        console.log("ADDRESS: " +data[i].address_1); 
-        console.log("CITY + STATE: " +data[i].city+ ", " +data[i].state);
-        console.log("LATITUDE: " +data[i].latitude);
         latitudeArray.push(data[i].latitude);
-        console.log("LONGITUDE: " +data[i].longitude);
         longitudeArray.push(data[i].longitude);
-        console.log("");
-        console.log("----------------");
-        console.log("===== SHUFFLE DATA ======");
         shuffle(data);
-        console.log("BREWERY NAME: " +data[i].name);
-        console.log("ADDRESS: " +data[i].address_1); 
-        console.log("CITY + STATE: " +data[i].city+ ", " +data[i].state);
-        console.log("LATITUDE: " +data[i].latitude);
         latitudeArray.push(data[i].latitude);
-        console.log("LONGITUDE: " +data[i].longitude);
 
         //creating dynamic Brewery Cards based on the city. Every card gets a unique ID so it can then be accessed later to have separate card buttons run separate functions 
         var brewBoxes = "";
@@ -191,12 +165,10 @@ function searchByCity(cityString){
 }
 // === SEARCH BY TYPE FUNCTION === 
 function searchByType(typeString){
-    console.log(typeString);
     breweryTypes = ["micro", "nano", "regional", "brewpub", "large", "planning", "bar", "contract", "proprietor", "closed"];
 
 
     if (typeString !== "micro" && typeString !== "nano" && typeString !== "regional" && typeString !== "brewpub" && typeString !== "large" && typeString !== "planning" && typeString !== "bar" && typeString !== "contract" && typeString !== "proprietor" && typeString !== "closed"){
-        console.log("That wasn't a type!");
         return; 
     }
     
@@ -210,19 +182,6 @@ function searchByType(typeString){
     .then (function (data){
         var latitudeArray = [];
         var longitudeArray = [];
-        for (k=0; k < data.length; k++){
-            console.log(data);
-            console.log("=====================");
-            console.log("BREWERY NAME: " +data[k].name);
-            console.log("ADDRESS: " +data[k].address_1);
-            console.log("BREWERY TYPE: " +data[k].brewery_type);
-            console.log("CITY + STATE: " +data[k].city+ ", " +data[k].state);
-            console.log("LATITUDE: " +data[k].latitude);
-            console.log("LONGITUDE: " +data[k].longitude);
-            console.log("=====================");
-
-
-        } 
     
     })
 
@@ -280,9 +239,6 @@ function toggleMenu() {
 function getDirections(userLatitude, userLongitude, endLocation){
   //makes a Google Map that switches from "?search" to "?directions" with the brewery info clicked on 
     //   var googleMap = document.createElement("iframe");
-      console.log("FROM GET DIRECTIONS ----------");
-      console.log(JSON.parse(userLatitude));
-      console.log(userLongitude);
       googleMap.setAttribute("width", "100%");
       googleMap.setAttribute("height", "100%");
       googleMap.setAttribute("frameborder", "0");
